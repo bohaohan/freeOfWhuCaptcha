@@ -1,0 +1,38 @@
+{
+  "name": "noCaptcha",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "free of chaptcha",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+      "default_popup": "popup.html"
+  },
+  "permissions": [
+      "webRequest",
+      "tabs",
+      "http://*/*",
+      "https://*/*",
+      "webRequestBlocking"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+      {
+          "matches": [
+              "http://210.42.121.134/stu/stu_index.jsp",
+              "http://210.42.121.241/stu/stu_index.jsp"
+          ],
+          "js": [
+              "scripts/jquery.min.js",
+              "scripts/nocap.js"]
+      }
+  ]
+}
