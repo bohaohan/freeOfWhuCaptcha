@@ -1,7 +1,6 @@
 /**
  * Created by bohaohan on 15/7/10.
  */
-<<<<<<< HEAD
 function sleep(n) {
     var start = new Date().getTime();
     while(true)  if(new Date().getTime()-start > n) return true;
@@ -9,10 +8,6 @@ function sleep(n) {
 function checkCa(){
     isCheck = true;
     console.log("start!");
-=======
-function checkCa(){
-    console.log("start!")
->>>>>>> develop
     var canvas = document.createElement('canvas');                        //新建一个canvas
     var ctx = canvas.getContext("2d");                                    //获取2D上下文
     var numbers = [];                                                     //存储数字模板的数组
@@ -35,7 +30,6 @@ function checkCa(){
         data: {"img":data},
         success:function(data){
             console.log(data);
-<<<<<<< HEAD
             $("input[name='xdvfb']").val(data.result);
             isCheck = false;
         },
@@ -98,12 +92,4 @@ $(document).ready(function(){
         login();
     });
     setInterval("checkChange()",500);
-=======
-            $("input[name='xdvfb']").val(data.result)
-        }
-    })
-}
-$(document).ready(function(){
-    checkCa("111");
->>>>>>> develop
 })
