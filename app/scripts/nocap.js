@@ -1,8 +1,13 @@
 /**
  * Created by bohaohan on 15/7/10.
  */
+function sleep(n) {
+    var start = new Date().getTime();
+    while(true)  if(new Date().getTime()-start > n) return true;
+}
 function checkCa(){
-    console.log("start!")
+    isCheck = true;
+    console.log("start!");
     var canvas = document.createElement('canvas');                        //新建一个canvas
     var ctx = canvas.getContext("2d");                                    //获取2D上下文
     var numbers = [];                                                     //存储数字模板的数组
@@ -25,10 +30,66 @@ function checkCa(){
         data: {"img":data},
         success:function(data){
             console.log(data);
-            $("input[name='xdvfb']").val(data.result)
+            $("input[name='xdvfb']").val(data.result);
+            isCheck = false;
+        },
+        error:function(){
+            isCheck = false;
+            $("#captcha-img").click();
         }
     })
 }
+function checkChange(){
+    if(isChange&&!isCheck){
+        isChange = false;
+        checkCa();
+    }
+    if(isTry&&!isCheck){
+        isTry = false;
+        login();
+    }
+}
+function login(){
+    var id = $("#qxftest").val();
+    var pwd = $("input[name = 'pwd']").val();
+    var xdvfb = $("input[name = 'xdvfb']").val();
+    var data = "?id="+id+"&pwd="+pwd+"&xdvfb="+xdvfb;
+    var url = "/servlet/Login"
+    if(!isCheck) {
+        $.ajax({
+            type: "post",
+            url: url + data,
+            success: function (data) {
+                if (data[1] == "!") {
+                    window.location = "/stu/stu_index.jsp";
+                } else {
+                    $("#captcha-img").click();
+                    isTry = true;
+                }
+            },
+            error: function () {
+                alert("请检查网络。或者教务系统挂了。。")
+            }
+        });
+    } else {
+        alert("等待验证码识别~");
+    }
+}
+
 $(document).ready(function(){
-    checkCa("111");
+    isChange = false;
+    isTry = false;
+    isCheck = false;
+    checkCa();
+    $("#captcha-img").click(function(){
+        isChange = true;
+    });
+    $(".change-captcha").click(function(){
+        isChange = true;
+    });
+    $("#loginBtn").click(function(e){
+        e.preventDefault();  //阻止事件冒泡
+        login();
+    });
+    setInterval("checkChange()",500);
 })
