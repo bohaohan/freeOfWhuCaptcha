@@ -1,13 +1,14 @@
 {
-  "name": "noCaptcha",
-  "version": "1.0.0",
+  "name": "whu自由验证码",
+  "version": "1.0.2",
   "manifest_version": 2,
   "description": "free of chaptcha",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/mIcon.png",
+    "128": "images/mIcon.png"
   },
   "browser_action": {
+      "default_icon":"images/mIcon.png",
       "default_popup": "popup.html"
   },
   "permissions": [
@@ -18,21 +19,20 @@
       "webRequestBlocking"
   ],
   "default_locale": "en",
-  "background": {
-    "scripts": [
-      "scripts/chromereload.js",
-      "scripts/background.js"
-    ]
-  },
   "content_scripts": [
       {
           "matches": [
               "http://210.42.121.134/stu/stu_index.jsp",
-              "http://210.42.121.241/stu/stu_index.jsp"
+              "http://210.42.121.241/stu/stu_index.jsp",
+              "http://210.42.121.241/servlet/Login",
+              "http://210.42.121.134/servlet/Login",
+              "http://210.42.121.241/",
+              "http://210.42.121.134/"
           ],
           "js": [
               "scripts/jquery.min.js",
-              "scripts/nocap.js"]
+              "scripts/nocap.js"
+          ]
       }
   ]
 }
