@@ -1,8 +1,8 @@
 {
-  "name": "whu自由验证码",
-  "version": "1.0.2",
+  "name": "whu验证码&&GPA就算器",
+  "version": "1.0.3",
   "manifest_version": 2,
-  "description": "free of chaptcha",
+  "description": "free of chaptcha and calculate GPA",
   "icons": {
     "16": "images/mIcon.png",
     "128": "images/mIcon.png"
@@ -10,6 +10,9 @@
   "browser_action": {
       "default_icon":"images/mIcon.png",
       "default_popup": "popup.html"
+  },
+  "background": {
+      "page": "background.html"
   },
   "permissions": [
       "webRequest",
@@ -21,17 +24,16 @@
   "default_locale": "en",
   "content_scripts": [
       {
-          "matches": [
-              "http://210.42.121.134/stu/stu_index.jsp",
-              "http://210.42.121.241/stu/stu_index.jsp",
-              "http://210.42.121.241/servlet/Login",
-              "http://210.42.121.134/servlet/Login",
-              "http://210.42.121.241/",
-              "http://210.42.121.134/"
+      	  "run_at": "document_end",
+      	  "all_frames": true,
+          "matches": [ "http://210.42.121.241/*", "http://210.42.121.134/*" ],
+          "css": [
+           "style/style.css" 
           ],
           "js": [
-              "scripts/jquery.min.js",
-              "scripts/nocap.js"
+              "scripts/jquery-2.1.4.min.js",
+              "scripts/nocap.js",
+              "scripts/script.js"
           ]
       }
   ]
